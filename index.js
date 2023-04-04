@@ -13,8 +13,8 @@ app.use(express.json());
 const {UserRouter}=require('./routes/user.router')
 const {validate}=require('./middleware/validate')
 
-app.use('/api',validate,UserRouter)
-app.use('/api',UserRouter)
+app.post('/api/post',validate,UserRouter)
+app.get('/api/get',UserRouter)
 
 const port = process.env.port || 8080
 

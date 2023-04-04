@@ -5,7 +5,7 @@ const UserRouter=express.Router();
 
 const {UserModel}=require('../model/user.model')
 
-UserRouter.post('/post',async(req,res)=>{
+UserRouter.post('/api/post',async(req,res)=>{
     try{
        const payload=req.body;
        const data=new UserModel(payload);
@@ -18,7 +18,7 @@ UserRouter.post('/post',async(req,res)=>{
     }
 })
 
-UserRouter.get('/get',async(req,res)=>{
+UserRouter.get('/api/get',async(req,res)=>{
     try{
    const data=await UserModel.find();
      res.status(200).json({'msg':'successfull','data':data})
