@@ -1,24 +1,29 @@
 
-const express=require('express');
-const cors=require('cors')
+const express = require('express');
+const cors = require('cors')
 require('dotenv').config()
 
-const {connection}=require('./config/db')
+const { connection } = require('./config/db')
 
-const app=express();
+const app = express();
 
 app.use(cors());
 app.use(express.json());
 
+const {UserRouter}=require('./routes/user.router')
+const {validate}=require('./middleware/validate')
 
-const port=process.env.port || 8080
+app.use('/api',validate,UserRouter)
+app.use('/api',UserRouter)
 
-app.listen(port,async()=>{
-    try{
-       await connection
-       console.log(`Connected to the database port no ${port}`)
+const port = process.env.port || 8080
+
+app.listen(port, async () => {
+    try {
+        await connection
+        console.log(`Connected to the database port no ${port}`)
     }
-    catch(err){
+    catch (err) {
         console.error(err);
     }
 })
